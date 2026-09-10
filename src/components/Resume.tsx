@@ -99,7 +99,14 @@ export function Resume() {
             {experiences.map((item, index) => (
               <li key={`${item.role.pt}-${index}`} className="avoid-break">
                 <div className="flex flex-wrap items-baseline justify-between gap-x-4">
-                  <h3 className="font-display text-[14px] font-semibold">{l(item.role)}</h3>
+                  <h3 className="font-display text-[14px] font-semibold">
+                    {l(item.role)}
+                    {item.promoted && (
+                      <span className="ml-2 font-sans text-[11px] font-medium text-[#6d28d9] print-exact">
+                        {t('experience.promoted')}
+                      </span>
+                    )}
+                  </h3>
                   <span className="font-mono text-[11px] text-[#5b5b70]">{l(item.period)}</span>
                 </div>
                 <p className="text-[12px] font-medium text-[#6d28d9] print-exact">

@@ -93,6 +93,8 @@ O oxlint (regra `react/only-export-components`) avisa quando um arquivo exporta 
 
 Toda string de conteúdo é do tipo `Localized` (`{ pt, en }`). Se adicionar campo novo, preencha os dois idiomas — o TypeScript reclama se faltar um.
 
+Cada `Experience` aceita duas marcações opcionais que viram pílula ao lado do cargo: `current` (verde, "Atual") e `promoted` (violeta, "Promovido", para o cargo de onde o Sony subiu). São independentes — um cargo encerrado por promoção leva só `promoted`, e é isso que diferencia "saí" de "fui promovido". O texto das duas está em `experience.current` e `experience.promoted` no `i18n.ts`, e o currículo mostra a de promoção como texto simples ao lado do cargo.
+
 Os filtros da seção de projetos são gerados automaticamente a partir das `tags`; não existe lista de filtros para manter.
 
 Java saiu de `skillGroups`, das duas experiências que o citavam (Digisystem e freelancer, na `stack` e no texto em PT e EN) e da `rotatingStack` do `Hero.tsx` — não é mais uma tecnologia que o Sony quer anunciar. Tirar uma tecnologia do site não é só mexer em `content.ts`: ela também aparece na `rotatingStack` fixa dentro do `Hero.tsx`, na `meta name="description"` e no `knowsAbout` do JSON-LD em `index.html`. Para conferir se sumiu de tudo, rode na raiz:

@@ -35,6 +35,11 @@ export function Experience() {
                         {t('experience.current')}
                       </span>
                     )}
+                    {item.promoted && (
+                      <span className="rounded-full bg-brand-500/15 px-2.5 py-0.5 text-xs font-medium text-brand-700 dark:text-brand-400">
+                        {t('experience.promoted')}
+                      </span>
+                    )}
                   </div>
 
                   <p className="mt-1 text-sm font-medium text-brand-600 dark:text-brand-400">

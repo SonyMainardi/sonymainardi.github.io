@@ -238,6 +238,7 @@ export type Experience = {
   company: Localized
   period: Localized
   current?: boolean
+  promoted?: boolean
   description: Localized
   stack: string[]
 }
@@ -260,8 +261,8 @@ export const experiences: Experience[] = [
   {
     role: { pt: 'Técnico de Apoio a Operações', en: 'Operations Support Technician' },
     company: { pt: 'Câmara dos Deputados', en: 'Chamber of Deputies' },
-    period: { pt: '2023 — atualmente', en: '2023 — present' },
-    current: true,
+    period: { pt: 'dez 2023 — fev 2024', en: 'Dec 2023 — Feb 2024' },
+    promoted: true,
     description: {
       pt: 'Monitoramento do Data Center da Câmara e de seus serviços críticos, utilizando principalmente a ferramenta Nagios, com acompanhamento de alertas e apoio na resposta a incidentes.',
       en: 'Monitoring of the Chamber Data Center and its critical services, mainly with Nagios, tracking alerts and supporting incident response.',

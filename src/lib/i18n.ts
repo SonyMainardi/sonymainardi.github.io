@@ -39,6 +39,7 @@ export const dictionary = {
   'experience.title': { pt: 'Experiência', en: 'Experience' },
   'experience.kicker': { pt: 'Trajetória profissional', en: 'Professional path' },
   'experience.current': { pt: 'Atual', en: 'Current' },
+  'experience.promoted': { pt: 'Promovido', en: 'Promoted' },
 
   'contact.title': { pt: 'Vamos conversar', en: "Let's talk" },
   'contact.kicker': { pt: 'Contato', en: 'Contact' },
