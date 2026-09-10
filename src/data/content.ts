@@ -2,7 +2,7 @@ import type { Localized } from '../lib/i18n'
 
 export const profile = {
   name: 'Sony Mainardi',
-  photo: './avatar.svg',
+  photo: './avatar.jpg',
   location: { pt: 'Brasília, DF — Brasil', en: 'Brasília, DF — Brazil' } satisfies Localized,
   role: {
     pt: 'Desenvolvedor Full Stack',
@@ -31,8 +31,21 @@ export const profile = {
 
 export const education: { title: Localized; detail: Localized }[] = [
   {
+    title: {
+      pt: 'Desenvolvimento em Aplicações Web',
+      en: 'Web Application Development',
+    },
+    detail: {
+      pt: 'Pós-graduação Lato Sensu — Faculdade Iguaçu · jun 2025 — out 2025',
+      en: 'Postgraduate specialization — Faculdade Iguaçu · Jun 2025 — Oct 2025',
+    },
+  },
+  {
     title: { pt: 'Sistemas de Informação', en: 'Information Systems' },
-    detail: { pt: 'Graduação concluída', en: 'Bachelor degree, completed' },
+    detail: {
+      pt: 'Bacharelado — Faculdade Anhanguera FACNET · 2009 — 2014',
+      en: 'Bachelor degree — Faculdade Anhanguera FACNET · 2009 — 2014',
+    },
   },
   {
     title: { pt: 'Técnico em Informática', en: 'IT Technician' },
@@ -72,7 +85,7 @@ export const skillGroups: SkillGroup[] = [
   },
   {
     title: { pt: 'Back-end', en: 'Back-end' },
-    items: ['Node.js', 'Java', 'MySQL', 'Apache', 'REST APIs'],
+    items: ['Node.js', 'MySQL', 'Apache', 'REST APIs'],
   },
   {
     title: { pt: 'Infra & Ferramentas', en: 'Infra & Tools' },
@@ -239,10 +252,10 @@ export const experiences: Experience[] = [
     period: { pt: '2023 — atualmente', en: '2023 — present' },
     current: true,
     description: {
-      pt: 'Desenvolvimento de projetos internos para o setor, criando ferramentas que resolvem problemas do dia a dia e melhoram a qualidade de vida da equipe. Trabalho com JavaScript, React, Node.js, Java, MySQL e Apache em ambiente Linux.',
-      en: 'Development of internal projects for the team, creating tools that solve everyday problems and improve the team routine. I work with JavaScript, React, Node.js, Java, MySQL and Apache on Linux.',
+      pt: 'Desenvolvimento de projetos internos para o setor, criando ferramentas que resolvem problemas do dia a dia e melhoram a qualidade de vida da equipe. Trabalho com JavaScript, React, Node.js, MySQL e Apache em ambiente Linux.',
+      en: 'Development of internal projects for the team, creating tools that solve everyday problems and improve the team routine. I work with JavaScript, React, Node.js, MySQL and Apache on Linux.',
     },
-    stack: ['JavaScript', 'React', 'Node.js', 'Java', 'MySQL', 'Apache'],
+    stack: ['JavaScript', 'React', 'Node.js', 'MySQL', 'Apache'],
   },
   {
     role: { pt: 'Técnico de Apoio a Operações', en: 'Operations Support Technician' },
@@ -260,9 +273,9 @@ export const experiences: Experience[] = [
     company: { pt: 'Projetos próprios', en: 'Personal projects' },
     period: { pt: '2023 — atualmente', en: '2023 — present' },
     description: {
-      pt: 'Estudo contínuo e desenvolvimento de projetos pessoais para aprofundar linguagens e ferramentas como JavaScript, TypeScript, React e Java.',
-      en: 'Continuous study and personal projects to deepen my knowledge of languages and tools such as JavaScript, TypeScript, React and Java.',
+      pt: 'Estudo contínuo e desenvolvimento de projetos pessoais para aprofundar linguagens e ferramentas como JavaScript, TypeScript e React.',
+      en: 'Continuous study and personal projects to deepen my knowledge of languages and tools such as JavaScript, TypeScript and React.',
     },
-    stack: ['TypeScript', 'React', 'Java'],
+    stack: ['TypeScript', 'React'],
   },
 ]

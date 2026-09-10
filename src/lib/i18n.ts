@@ -94,7 +94,7 @@ export function initialLang(): Lang {
   if (typeof window === 'undefined') return 'pt'
   const stored = window.localStorage.getItem(LANG_STORAGE_KEY)
   if (stored === 'pt' || stored === 'en') return stored
-  return navigator.language.toLowerCase().startsWith('pt') ? 'pt' : 'en'
+  return 'pt'
 }
 
 export function useI18n(): I18nValue {

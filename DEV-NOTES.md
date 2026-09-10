@@ -76,7 +76,7 @@ O oxlint (regra `react/only-export-components`) avisa quando um arquivo exporta 
 - **lucide-react v1 removeu logos de marca** (GitHub, LinkedIn). Estão em `components/BrandIcons.tsx` como SVG inline. Não tente importar `Github`/`Linkedin` do lucide.
 - **npm no Windows pode falhar com `ENOTEMPTY`** ao instalar `lucide-react` (milhares de arquivos pequenos, antivírus segura o diretório). Basta rodar o `npm install` de novo.
 - `vite.config.ts` usa `base: './'` para o site funcionar em subpasta do GitHub Pages sem ajuste extra.
-- **O script inline das páginas HTML repete as chaves do localStorage** (`portfolio:theme`, `portfolio:lang`). É o preço de não ter flash de tema: ele roda antes do React. Mudou as chaves em `theme.ts`/`i18n.ts`? Mude também em `index.html` e `cv.html`.
+- **O script inline das páginas HTML repete as chaves do localStorage** (`portfolio:theme`, `portfolio:lang`) **e a lógica de idioma inicial**. É o preço de não ter flash de tema: ele roda antes do React. Mudou as chaves ou o idioma padrão em `theme.ts`/`i18n.ts`? Mude também em `index.html` **e** `cv.html` — são três lugares para o idioma (`initialLang` e os dois scripts inline), e esquecer um deixa o `<html lang>` divergindo do texto na tela.
 
 ## 5. Como mexer no conteúdo
 
@@ -89,10 +89,29 @@ O oxlint (regra `react/only-export-components`) avisa quando um arquivo exporta 
 | Repositórios que não devem aparecer | `hiddenRepos` |
 | Experiências profissionais | `experiences` |
 | Menu, botões, títulos de seção, currículo | `dictionary` em `src/lib/i18n.ts` |
+| Foto do hero | `photo` em `profile`, apontando para um arquivo em `public/` |
 
 Toda string de conteúdo é do tipo `Localized` (`{ pt, en }`). Se adicionar campo novo, preencha os dois idiomas — o TypeScript reclama se faltar um.
 
 Os filtros da seção de projetos são gerados automaticamente a partir das `tags`; não existe lista de filtros para manter.
+
+Java saiu de `skillGroups`, das duas experiências que o citavam (Digisystem e freelancer, na `stack` e no texto em PT e EN) e da `rotatingStack` do `Hero.tsx` — não é mais uma tecnologia que o Sony quer anunciar. Tirar uma tecnologia do site não é só mexer em `content.ts`: ela também aparece na `rotatingStack` fixa dentro do `Hero.tsx`, na `meta name="description"` e no `knowsAbout` do JSON-LD em `index.html`. Para conferir se sumiu de tudo, rode na raiz:
+
+```
+grep -rnoP 'Java(?!Script)' --exclude-dir=node_modules --exclude-dir=dist --exclude-dir=.git .
+```
+
+Duas armadilhas que já custaram uma passada errada: filtrar com `grep -v JavaScript` descarta a linha inteira e esconde justamente os textos que citam as duas; e buscar só em `src/` deixa o `index.html` de fora. Vale confirmar no build (`npm run build` e o mesmo grep em `dist/`), que é o que de fato vai pro ar.
+
+O projeto `Santander Dev Week API` ficou no ar de propósito, com a tag `Java` e o filtro que ela gera: é um projeto real e a decisão foi manter o histórico visível. Não "corrija" essa inconsistência sem perguntar.
+
+### Foto do perfil
+
+`public/avatar.jpg` é a foto do LinkedIn (400x400, ~20 KB), baixada e versionada no repositório. Não vale apontar `photo` direto para a URL do `media.licdn.com`: aquela URL carrega um token assinado com data de expiração no próprio caminho, e trocar o trecho de tamanho por um maior devolve 403. Fora isso, seria uma dependência externa numa imagem que carrega antes de tudo.
+
+O `avatar.svg` com as iniciais saiu do `public/` — está no histórico do git se um dia precisar.
+
+400x400 é o maior tamanho que o LinkedIn entrega nessa URL — trocar o trecho de tamanho no caminho por 800x800 devolve 403. No hero a imagem é exibida com pouco mais de 350px de largura, então em tela retina ela fica levemente macia. A cópia que estava em `Downloads/sony avatar.jpg` foi conferida e é byte a byte a mesma imagem, não um original maior. Se aparecer um em resolução maior, é só substituir o arquivo mantendo o nome.
 
 ## 6. Projetos vindos da API do GitHub
 
@@ -116,6 +135,7 @@ O currículo usa só a lista estática — página de impressão não deve depen
 - `MotionConfig reducedMotion` no `App` desliga as animações de transform do Motion quando o sistema pede menos movimento; o CSS já cortava animação e transição via media query.
 - Skip link, `aria-current` no item ativo do menu, `aria-pressed` nos filtros, `aria-controls` e `aria-expanded` no botão do menu mobile, `aria-live` no feedback de copiado, `aria-label` na navegação.
 - Menu mobile fecha com `Escape` e ao passar para largura de desktop — senão o `overflow: hidden` do body ficava preso.
+- O site abre sempre em português. O `initialLang` respeita a escolha guardada em `portfolio:lang` e, sem nada guardado, devolve `pt` — antes ele olhava `navigator.language` e um visitante com navegador em inglês caía no EN. Como o `<html lang="pt-BR">` das duas páginas é estático, o padrão em inglês também deixava o atributo divergindo do conteúdo até o React montar. O botão PT/EN continua funcionando e a escolha do visitante continua persistindo.
 - Contraste medido no tema claro (WCAG AA, texto pequeno a partir de 4.5:1). O que mudou por causa disso:
   - kickers e ícones passaram de `brand-500` (3.96:1) para `brand-600` (5.33:1);
   - ícones e links em `accent-500` (2.27:1) viraram `accent-700` no claro, mantendo `accent-500` no escuro;
@@ -135,7 +155,7 @@ O currículo usa só a lista estática — página de impressão não deve depen
 
 - Colocar o link do site no README de perfil (`SonyMainardi/sonymainardi`).
 - Adicionar prints ou GIFs dos projetos nos cards — hoje os cards são só texto.
+- Trocar o `SM` do logo da navbar e do `favicon.svg` por algo derivado da foto, se quiser coerência visual — hoje as iniciais continuam lá de propósito, como marca.
 - Migrar as descrições de experiência para bullets com resultados mensuráveis (precisa de números que só o Sony tem).
-- Trocar o avatar por uma foto real quando houver uma boa.
 - Testar com leitor de tela de verdade (NVDA); hoje a checagem foi por marcação e contraste calculado.
 - Se o portfólio crescer, gerar a lista de repositórios em build time (com token nas Actions) em vez de runtime.

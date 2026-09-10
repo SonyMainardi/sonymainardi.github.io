@@ -14,7 +14,7 @@
         try {
           var lang = localStorage.getItem('portfolio:lang')
           if (lang !== 'pt' && lang !== 'en') {
-            lang = (navigator.language || 'pt').toLowerCase().indexOf('pt') === 0 ? 'pt' : 'en'
+            lang = 'pt'
           }
           document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en'
         } catch (error) {}

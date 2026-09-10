@@ -5,7 +5,7 @@ import { GithubIcon, LinkedinIcon } from './BrandIcons'
 import { profile } from '../data/content'
 import { useI18n } from '../lib/i18n'
 
-const rotatingStack = ['JavaScript', 'TypeScript', 'React', 'Node.js', 'Java']
+const rotatingStack = ['JavaScript', 'TypeScript', 'React', 'Node.js']
 
 export function Hero() {
   const { t, l } = useI18n()
