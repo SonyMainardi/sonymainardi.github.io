@@ -1,4 +1,4 @@
-import { motion, useScroll, useSpring } from 'motion/react'
+import { MotionConfig, motion, useScroll, useSpring } from 'motion/react'
 import { About } from './components/About'
 import { Background } from './components/Background'
 import { Contact } from './components/Contact'
@@ -10,6 +10,7 @@ import { Projects } from './components/Projects'
 import { I18nProvider } from './lib/I18nProvider'
 import { ThemeProvider } from './lib/ThemeProvider'
 import { Skills } from './components/Skills'
+import { SkipLink } from './components/SkipLink'
 
 function ScrollProgress() {
   const { scrollYProgress } = useScroll()
@@ -27,18 +28,21 @@ export default function App() {
   return (
     <ThemeProvider>
       <I18nProvider>
-        <ScrollProgress />
-        <Background />
-        <Navbar />
-        <main>
-          <Hero />
-          <About />
-          <Skills />
-          <Projects />
-          <Experience />
-          <Contact />
-        </main>
-        <Footer />
+        <MotionConfig reducedMotion="user">
+          <SkipLink />
+          <ScrollProgress />
+          <Background />
+          <Navbar />
+          <main id="main">
+            <Hero />
+            <About />
+            <Skills />
+            <Projects />
+            <Experience />
+            <Contact />
+          </main>
+          <Footer />
+        </MotionConfig>
       </I18nProvider>
     </ThemeProvider>
   )

@@ -23,7 +23,7 @@ export function About() {
           <Reveal from="right" delay={0.05}>
             <article className="card rounded-2xl p-6">
               <h3 className="flex items-center gap-2 font-display text-lg font-semibold">
-                <GraduationCap size={18} className="text-brand-500 dark:text-brand-400" />
+                <GraduationCap size={18} className="text-brand-600 dark:text-brand-400" />
                 {t('about.education')}
               </h3>
               <ul className="mt-4 space-y-3">
@@ -40,7 +40,7 @@ export function About() {
           <Reveal from="right" delay={0.12}>
             <article className="card rounded-2xl p-6">
               <h3 className="flex items-center gap-2 font-display text-lg font-semibold">
-                <LanguagesIcon size={18} className="text-accent-500" />
+                <LanguagesIcon size={18} className="text-accent-700 dark:text-accent-500" />
                 {t('about.languages')}
               </h3>
               <ul className="mt-4 space-y-4">

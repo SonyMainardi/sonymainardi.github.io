@@ -38,7 +38,7 @@ export function Contact() {
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <a
                 href={`mailto:${profile.email}`}
-                className="inline-flex items-center gap-2 rounded-xl bg-linear-to-r from-brand-600 to-accent-500 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-brand-600/25 transition-transform hover:-translate-y-0.5"
+                className="inline-flex items-center gap-2 rounded-xl bg-linear-to-r from-brand-600 to-accent-700 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-brand-600/25 transition-transform hover:-translate-y-0.5"
               >
                 <Mail size={16} />
                 {t('contact.email')}
@@ -57,7 +57,7 @@ export function Contact() {
                 >
                   {copied ? <Check size={16} className="text-emerald-500" /> : <Copy size={16} />}
                 </motion.span>
-                {copied ? t('contact.copied') : t('contact.copy')}
+                <span aria-live="polite">{copied ? t('contact.copied') : t('contact.copy')}</span>
               </button>
 
               <div className="ml-auto flex items-center gap-2">

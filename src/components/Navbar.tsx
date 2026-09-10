@@ -58,9 +58,28 @@ export function Navbar() {
     }
   }, [open])
 
+  useEffect(() => {
+    if (!open) return
+
+    const media = window.matchMedia('(min-width: 768px)')
+    const close = () => setOpen(false)
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') close()
+    }
+
+    window.addEventListener('keydown', onKeyDown)
+    media.addEventListener('change', close)
+
+    return () => {
+      window.removeEventListener('keydown', onKeyDown)
+      media.removeEventListener('change', close)
+    }
+  }, [open])
+
   return (
     <header className="fixed inset-x-0 top-0 z-50">
       <motion.nav
+        aria-label={t('a11y.nav')}
         initial={{ y: -80, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
@@ -71,7 +90,7 @@ export function Navbar() {
         }`}
       >
         <a href="#top" className="group flex items-center gap-2 font-display text-sm font-bold">
-          <span className="grid size-8 place-items-center rounded-lg bg-linear-to-br from-brand-500 to-accent-500 text-white">
+          <span className="grid size-8 place-items-center rounded-lg bg-linear-to-br from-brand-600 to-accent-700 text-white">
             SM
           </span>
           <span className="hidden sm:inline">Sony Mainardi</span>
@@ -82,6 +101,7 @@ export function Navbar() {
             <li key={link.id}>
               <a
                 href={`#${link.id}`}
+                aria-current={active === link.id ? 'true' : undefined}
                 className="relative block rounded-lg px-3 py-2 text-sm font-medium text-muted transition-colors hover:text-[var(--fg)]"
               >
                 {active === link.id && (
@@ -132,8 +152,9 @@ export function Navbar() {
           <button
             type="button"
             onClick={() => setOpen((value) => !value)}
-            aria-label={t('a11y.menu')}
+            aria-label={open ? t('a11y.close') : t('a11y.menu')}
             aria-expanded={open}
+            aria-controls="mobile-menu"
             className="grid size-9 place-items-center rounded-lg border border-hair transition-colors hover:bg-brand-500/10 md:hidden"
           >
             {open ? <X size={16} /> : <Menu size={16} />}
@@ -148,6 +169,7 @@ export function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -12 }}
             transition={{ duration: 0.22 }}
+            id="mobile-menu"
             className="mx-4 mt-2 rounded-2xl border border-hair bg-[var(--card)] p-3 backdrop-blur-xl md:hidden"
           >
             <ul className="flex flex-col">

@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="Sony Mainardi">
+  <title>Sony Mainardi</title>
+  <defs>
+    <linearGradient id="base" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#16162f" />
+      <stop offset="55%" stop-color="#0b0b16" />
+      <stop offset="100%" stop-color="#07131a" />
+    </linearGradient>
+    <linearGradient id="line" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#a78bfa" />
+      <stop offset="50%" stop-color="#22d3ee" />
+      <stop offset="100%" stop-color="#8b5cf6" />
+    </linearGradient>
+    <radialGradient id="violet" cx="26%" cy="18%" r="68%">
+      <stop offset="0%" stop-color="#8b5cf6" stop-opacity="0.55" />
+      <stop offset="100%" stop-color="#8b5cf6" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="cyan" cx="82%" cy="88%" r="62%">
+      <stop offset="0%" stop-color="#06b6d4" stop-opacity="0.45" />
+      <stop offset="100%" stop-color="#06b6d4" stop-opacity="0" />
+    </radialGradient>
+    <pattern id="grid" width="42.6" height="42.6" patternUnits="userSpaceOnUse">
+      <path d="M42.6 0H0V42.6" fill="none" stroke="#ffffff" stroke-opacity="0.05" stroke-width="1" />
+    </pattern>
+  </defs>
+
+  <rect width="512" height="512" fill="url(#base)" />
+  <rect width="512" height="512" fill="url(#grid)" />
+  <rect width="512" height="512" fill="url(#violet)" />
+  <rect width="512" height="512" fill="url(#cyan)" />
+
+  <g fill="none" stroke="url(#line)">
+    <circle cx="256" cy="256" r="168" stroke-opacity="0.3" stroke-width="1.5" stroke-dasharray="3 13" stroke-linecap="round" />
+    <circle cx="256" cy="256" r="134" stroke-opacity="0.65" stroke-width="2.5" />
+  </g>
+  <circle cx="256" cy="88" r="7" fill="#22d3ee" />
+  <circle cx="374" cy="374" r="5" fill="#a78bfa" fill-opacity="0.85" />
+  <circle cx="138" cy="374" r="3.5" fill="#a78bfa" fill-opacity="0.5" />
+
+  <text x="256" y="246" text-anchor="middle" dominant-baseline="central" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="132" font-weight="700" letter-spacing="4" fill="url(#line)">SM</text>
+  <text x="256" y="336" text-anchor="middle" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="19" font-weight="600" letter-spacing="9" fill="#8f8fae">FULL STACK</text>
+</svg>

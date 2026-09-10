@@ -40,7 +40,7 @@ export function Skills() {
       <Reveal delay={0.15}>
         <article className="card mt-5 rounded-2xl p-6">
           <h3 className="flex items-center gap-2 font-display text-lg font-semibold">
-            <Sparkles size={18} className="text-accent-500" />
+            <Sparkles size={18} className="text-accent-700 dark:text-accent-500" />
             {t('skills.soft')}
           </h3>
           <ul className="mt-4 flex flex-wrap gap-2">

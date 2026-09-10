@@ -2,7 +2,7 @@ import type { Localized } from '../lib/i18n'
 
 export const profile = {
   name: 'Sony Mainardi',
-  photo: './sony.png',
+  photo: './avatar.svg',
   location: { pt: 'Brasília, DF — Brasil', en: 'Brasília, DF — Brazil' } satisfies Localized,
   role: {
     pt: 'Desenvolvedor Full Stack',
@@ -13,7 +13,9 @@ export const profile = {
     en: 'I build web applications end to end — focused on JavaScript, TypeScript, React and Node.js.',
   } satisfies Localized,
   email: 'sonylethor@gmail.com',
+  username: 'SonyMainardi',
   github: 'https://github.com/SonyMainardi',
+  website: 'https://sonymainardi.github.io',
   linkedin: 'https://www.linkedin.com/in/sonymainardi/',
   bio: [
     {
@@ -87,13 +89,17 @@ export const softSkills: Localized[] = [
 ]
 
 export type Project = {
+  slug: string
   name: string
   description: Localized
   tags: string[]
-  repo: string
   demo?: string
   featured?: boolean
+  stars?: number
+  updatedAt?: string
 }
+
+export const repoUrl = (slug: string) => `${profile.github}/${slug}`
 
 export const projects: Project[] = [
   {
@@ -103,7 +109,7 @@ export const projects: Project[] = [
       en: 'JavaScript app to look up vehicle data, with search and dynamic rendering of the results.',
     },
     tags: ['JavaScript', 'API'],
-    repo: 'https://github.com/SonyMainardi/consulta-carros',
+    slug: 'consulta-carros',
     featured: true,
   },
   {
@@ -113,7 +119,7 @@ export const projects: Project[] = [
       en: 'Pokédex consuming the PokeAPI with pagination, type-based cards and a responsive layout in vanilla HTML, CSS and JavaScript.',
     },
     tags: ['JavaScript', 'API', 'CSS'],
-    repo: 'https://github.com/SonyMainardi/pokedex',
+    slug: 'pokedex',
     featured: true,
   },
   {
@@ -123,7 +129,7 @@ export const projects: Project[] = [
       en: 'Rick and Morty API client listing characters with filters and details, built with HTML, CSS and JavaScript.',
     },
     tags: ['JavaScript', 'API'],
-    repo: 'https://github.com/SonyMainardi/rick-and-morty',
+    slug: 'rick-and-morty',
     demo: 'https://sonymainardi.github.io/rick-and-morty/',
     featured: true,
   },
@@ -134,7 +140,7 @@ export const projects: Project[] = [
       en: 'React app that consumes the GitHub API and displays any user profile and repositories.',
     },
     tags: ['React', 'API'],
-    repo: 'https://github.com/SonyMainardi/api-github',
+    slug: 'api-github',
     featured: true,
   },
   {
@@ -144,7 +150,7 @@ export const projects: Project[] = [
       en: 'Rebuild of the DIO portal with login authentication using React Hook Form and validation.',
     },
     tags: ['React'],
-    repo: 'https://github.com/SonyMainardi/portal-dio',
+    slug: 'portal-dio',
   },
   {
     name: 'Blog Next.js',
@@ -153,7 +159,7 @@ export const projects: Project[] = [
       en: 'Blog built with Next.js as a challenge project, with post routes and content rendering.',
     },
     tags: ['React', 'Next.js'],
-    repo: 'https://github.com/SonyMainardi/blog-nextjs',
+    slug: 'blog-nextjs',
   },
   {
     name: 'Login & Senha',
@@ -162,7 +168,7 @@ export const projects: Project[] = [
       en: 'Login and password validation written in TypeScript, exploring typing and front-end business rules.',
     },
     tags: ['TypeScript'],
-    repo: 'https://github.com/SonyMainardi/login-senha',
+    slug: 'login-senha',
   },
   {
     name: 'Calculadora',
@@ -171,7 +177,7 @@ export const projects: Project[] = [
       en: 'React calculator with reusable components and state control over the operations.',
     },
     tags: ['React'],
-    repo: 'https://github.com/SonyMainardi/calculadora',
+    slug: 'calculadora',
   },
   {
     name: 'Mario Kart',
@@ -180,7 +186,7 @@ export const projects: Project[] = [
       en: 'Mario Kart race simulator in Node.js, with block logic, dice rolls and per-round scoring.',
     },
     tags: ['Node.js'],
-    repo: 'https://github.com/SonyMainardi/Mario-Kart',
+    slug: 'Mario-Kart',
   },
   {
     name: 'Script Linux',
@@ -189,7 +195,7 @@ export const projects: Project[] = [
       en: 'Shell script that automates user, group and permission creation on Linux servers.',
     },
     tags: ['Linux'],
-    repo: 'https://github.com/SonyMainardi/script-linux',
+    slug: 'script-linux',
   },
   {
     name: 'Santander Dev Week API',
@@ -198,8 +204,20 @@ export const projects: Project[] = [
       en: 'Java REST API built during Santander Dev Week, modeling a banking domain.',
     },
     tags: ['Java'],
-    repo: 'https://github.com/SonyMainardi/santander-dev-week-2023-api',
+    slug: 'santander-dev-week-2023-api',
   },
+]
+
+export const hiddenRepos: string[] = [
+  'sonymainardi',
+  'sonymainardi.github.io',
+  'sony-portfolio',
+  'economia-promo',
+  'projeto-iphone',
+  'projeto-spring',
+  'desafio-conta-bancaria',
+  'dio-trilha-java-basico',
+  'dio-lab-open-source',
 ]
 
 export type Experience = {

@@ -23,7 +23,7 @@ export function Experience() {
           {experiences.map((item, index) => (
             <li key={`${item.role.pt}-${index}`} className="relative sm:pl-12">
               <span className="absolute left-0 top-6 hidden size-8 place-items-center rounded-full border border-hair bg-[var(--bg)] sm:grid">
-                <Briefcase size={14} className="text-brand-500 dark:text-brand-400" />
+                <Briefcase size={14} className="text-brand-600 dark:text-brand-400" />
               </span>
 
               <Reveal from="left" delay={index * 0.08}>
@@ -31,7 +31,7 @@ export function Experience() {
                   <div className="flex flex-wrap items-center gap-3">
                     <h3 className="font-display text-lg font-semibold">{l(item.role)}</h3>
                     {item.current && (
-                      <span className="rounded-full bg-emerald-500/15 px-2.5 py-0.5 text-xs font-medium text-emerald-600 dark:text-emerald-400">
+                      <span className="rounded-full bg-emerald-500/15 px-2.5 py-0.5 text-xs font-medium text-emerald-700 dark:text-emerald-400">
                         {t('experience.current')}
                       </span>
                     )}

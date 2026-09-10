@@ -15,8 +15,11 @@
   --color-brand-400: #a78bfa;
   --color-brand-500: #8b5cf6;
   --color-brand-600: #7c3aed;
+  --color-brand-700: #6d28d9;
   --color-accent-400: #22d3ee;
   --color-accent-500: #06b6d4;
+  --color-accent-600: #0891b2;
+  --color-accent-700: #0e7490;
 
   --color-muted: var(--muted);
   --color-hair: var(--border);
@@ -104,7 +107,7 @@ body {
 }
 
 ::selection {
-  background: var(--color-brand-500);
+  background: var(--color-brand-600);
   color: white;
 }
 

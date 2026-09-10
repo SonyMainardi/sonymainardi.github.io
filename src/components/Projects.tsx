@@ -1,40 +1,53 @@
 import { useMemo, useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
-import { ArrowUpRight, ExternalLink, Star } from 'lucide-react'
+import { ArrowUpRight, ExternalLink, History, Star } from 'lucide-react'
 import { GithubIcon } from './BrandIcons'
-import { profile, projects } from '../data/content'
+import { profile, repoUrl } from '../data/content'
 import { useI18n } from '../lib/i18n'
+import { useProjects } from '../lib/useProjects'
 import { Reveal } from './Reveal'
 import { Section } from './Section'
 
 export function Projects() {
-  const { t, l } = useI18n()
-  const [filter, setFilter] = useState<string>('all')
+  const { t, l, lang } = useI18n()
+  const { items } = useProjects()
+  const [filter, setFilter] = useState('all')
 
   const tags = useMemo(() => {
     const unique = new Set<string>()
-    for (const project of projects) {
+    for (const project of items) {
       for (const tag of project.tags) unique.add(tag)
     }
     return ['all', ...[...unique].sort()]
-  }, [])
+  }, [items])
+
+  const active = tags.includes(filter) ? filter : 'all'
 
   const visible = useMemo(
-    () => (filter === 'all' ? projects : projects.filter((p) => p.tags.includes(filter))),
-    [filter],
+    () => (active === 'all' ? items : items.filter((project) => project.tags.includes(active))),
+    [items, active],
   )
+
+  const formatDate = useMemo(() => {
+    const format = new Intl.DateTimeFormat(lang === 'pt' ? 'pt-BR' : 'en-GB', {
+      month: '2-digit',
+      year: 'numeric',
+    })
+    return (value: string) => format.format(new Date(value))
+  }, [lang])
 
   return (
     <Section id="projects" kicker={t('projects.kicker')} title={t('projects.title')}>
       <Reveal>
-        <div className="flex flex-wrap gap-2">
+        <div role="group" aria-label={t('projects.filter')} className="flex flex-wrap gap-2">
           {tags.map((tag) => {
-            const isActive = filter === tag
+            const isActive = active === tag
             return (
               <button
                 key={tag}
                 type="button"
                 onClick={() => setFilter(tag)}
+                aria-pressed={isActive}
                 className={`relative rounded-full border px-3.5 py-1.5 font-mono text-xs transition-colors ${
                   isActive
                     ? 'border-transparent text-white'
@@ -44,7 +57,7 @@ export function Projects() {
                 {isActive && (
                   <motion.span
                     layoutId="project-filter"
-                    className="absolute inset-0 rounded-full bg-linear-to-r from-brand-600 to-accent-500"
+                    className="absolute inset-0 rounded-full bg-linear-to-r from-brand-600 to-accent-700"
                     transition={{ type: 'spring', stiffness: 380, damping: 32 }}
                   />
                 )}
@@ -59,7 +72,7 @@ export function Projects() {
         <AnimatePresence mode="popLayout">
           {visible.map((project) => (
             <motion.li
-              key={project.name}
+              key={project.slug}
               layout
               initial={{ opacity: 0, scale: 0.95, y: 18 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -72,11 +85,15 @@ export function Projects() {
 
               <div className="flex items-start justify-between gap-3">
                 <h3 className="font-display text-lg font-semibold">{project.name}</h3>
-                {project.featured && (
-                  <span title="destaque" className="text-accent-500">
-                    <Star size={15} fill="currentColor" />
-                  </span>
-                )}
+                <div className="flex shrink-0 items-center gap-2 text-accent-700 dark:text-accent-500">
+                  {project.stars ? (
+                    <span className="inline-flex items-center gap-1 font-mono text-xs">
+                      <Star size={13} fill="currentColor" />
+                      {project.stars}
+                    </span>
+                  ) : null}
+                  {project.featured && !project.stars && <Star size={15} fill="currentColor" />}
+                </div>
               </div>
 
               <p className="mt-3 flex-1 text-sm leading-relaxed text-muted">
@@ -87,7 +104,7 @@ export function Projects() {
                 {project.tags.map((tag) => (
                   <li
                     key={tag}
-                    className="rounded-md bg-brand-500/10 px-2 py-1 font-mono text-[11px] text-brand-600 dark:text-brand-400"
+                    className="rounded-md bg-brand-500/10 px-2 py-1 font-mono text-[11px] text-brand-700 dark:text-brand-400"
                   >
                     {tag}
                   </li>
@@ -96,10 +113,10 @@ export function Projects() {
 
               <div className="mt-5 flex items-center gap-4 border-t border-hair pt-4 text-sm">
                 <a
-                  href={project.repo}
+                  href={repoUrl(project.slug)}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-1.5 font-medium transition-colors hover:text-brand-500"
+                  className="inline-flex items-center gap-1.5 font-medium transition-colors hover:text-brand-600 dark:hover:text-brand-400"
                 >
                   <GithubIcon size={15} />
                   {t('projects.code')}
@@ -109,11 +126,20 @@ export function Projects() {
                     href={project.demo}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center gap-1.5 font-medium transition-colors hover:text-accent-500"
+                    className="inline-flex items-center gap-1.5 font-medium transition-colors hover:text-accent-700 dark:hover:text-accent-400"
                   >
                     <ExternalLink size={15} />
                     {t('projects.demo')}
                   </a>
+                )}
+                {project.updatedAt && (
+                  <span
+                    title={`${t('projects.updated')}: ${formatDate(project.updatedAt)}`}
+                    className="ml-auto inline-flex items-center gap-1 font-mono text-[11px] text-muted"
+                  >
+                    <History size={12} aria-hidden />
+                    {formatDate(project.updatedAt)}
+                  </span>
                 )}
               </div>
             </motion.li>

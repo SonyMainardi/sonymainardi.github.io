@@ -13,7 +13,7 @@ export function Section({ id, kicker, title, children }: SectionProps) {
     <section id={id} className="scroll-mt-24 py-20 sm:py-28">
       <div className="mx-auto w-full max-w-6xl px-5 sm:px-8">
         <Reveal>
-          <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand-500 dark:text-brand-400">
+          <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand-600 dark:text-brand-400">
             {kicker}
           </p>
           <h2 className="mt-3 font-display text-3xl font-bold tracking-tight sm:text-4xl">

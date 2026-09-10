@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
-import { ArrowDown, Mail, MapPin } from 'lucide-react'
+import { ArrowDown, FileText, Mail, MapPin } from 'lucide-react'
 import { GithubIcon, LinkedinIcon } from './BrandIcons'
 import { profile } from '../data/content'
 import { useI18n } from '../lib/i18n'
@@ -69,7 +69,7 @@ export function Hero() {
                   animate={{ y: 0, opacity: 1 }}
                   exit={{ y: -28, opacity: 0 }}
                   transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-                  className="col-start-1 row-start-1 font-mono text-lg text-brand-500 dark:text-brand-400 sm:text-xl"
+                  className="col-start-1 row-start-1 font-mono text-lg text-brand-600 dark:text-brand-400 sm:text-xl"
                 >
                   {rotatingStack[index]}
                 </motion.span>
@@ -94,7 +94,7 @@ export function Hero() {
           >
             <a
               href="#projects"
-              className="group inline-flex items-center gap-2 rounded-xl bg-linear-to-r from-brand-600 to-accent-500 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-brand-600/25 transition-transform hover:-translate-y-0.5"
+              className="group inline-flex items-center gap-2 rounded-xl bg-linear-to-r from-brand-600 to-accent-700 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-brand-600/25 transition-transform hover:-translate-y-0.5"
             >
               {t('hero.cta.projects')}
             </a>
@@ -103,6 +103,13 @@ export function Hero() {
               className="inline-flex items-center gap-2 rounded-xl border border-hair bg-[var(--card)] px-5 py-3 text-sm font-semibold backdrop-blur transition-colors hover:bg-brand-500/10"
             >
               {t('hero.cta.contact')}
+            </a>
+            <a
+              href="./cv.html"
+              className="inline-flex items-center gap-2 rounded-xl px-4 py-3 text-sm font-semibold text-muted transition-colors hover:text-[var(--fg)]"
+            >
+              <FileText size={16} />
+              {t('hero.cta.resume')}
             </a>
           </motion.div>
 
@@ -122,7 +129,7 @@ export function Hero() {
                 target="_blank"
                 rel="noreferrer"
                 aria-label="GitHub"
-                className="transition-colors hover:text-brand-500"
+                className="transition-colors hover:text-brand-600 dark:hover:text-brand-400"
               >
                 <GithubIcon size={18} />
               </a>
@@ -131,14 +138,14 @@ export function Hero() {
                 target="_blank"
                 rel="noreferrer"
                 aria-label="LinkedIn"
-                className="transition-colors hover:text-brand-500"
+                className="transition-colors hover:text-brand-600 dark:hover:text-brand-400"
               >
                 <LinkedinIcon size={18} />
               </a>
               <a
                 href={`mailto:${profile.email}`}
                 aria-label="E-mail"
-                className="transition-colors hover:text-brand-500"
+                className="transition-colors hover:text-brand-600 dark:hover:text-brand-400"
               >
                 <Mail size={18} />
               </a>
@@ -161,7 +168,7 @@ export function Hero() {
             <div className="relative overflow-hidden rounded-[2rem] border border-hair bg-[var(--card)] p-2 backdrop-blur">
               <img
                 src={profile.photo}
-                alt={profile.name}
+                alt={t('a11y.avatar')}
                 loading="eager"
                 className="aspect-square w-full rounded-[1.6rem] object-cover"
               />
